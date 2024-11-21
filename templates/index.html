@@ -3,59 +3,45 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hexagon Tile Game</title>
-    <style>
-        body {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            margin: 0;
-            font-family: Arial, sans-serif;
-            background-color: #f0f0f0;
-        }
-        #board {
-            display: grid;
-            grid-template-columns: repeat(10, 60px);
-            grid-template-rows: repeat(10, 52px);
-            gap: 2px;
-        }
-        .hex {
-            width: 60px;
-            height: 52px;
-            background-color: lightgray;
-            clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
-            transition: background-color 0.2s;
-        }
-    </style>
+    <title>Trail Finder Game</title>
+    <link rel="stylesheet" href="/static/style.css">
 </head>
 <body>
+    <h1 id="game-title">Trail Finder</h1>
 
-<div id="board">
-    <!-- Hexagonal tiles will be added here on clicks -->
-</div>
+    <!-- Level and Player Selection -->
+    <div id="level-info">
+        <span id="level-text">Level: Easy</span>
+        <span id="player-text">Player: 1</span>
+    </div>
 
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script>
-    $(document).ready(function() {
-        // Create an empty board of hex tiles
-        for (let i = 0; i < 100; i++) {
-            const hexTile = $('<div class="hex"></div>');
-            hexTile.data("clicked", false);  // Track if a tile has been clicked
-            $('#board').append(hexTile);
-        }
+    <!-- Game Board Container -->
+    <div id="board" class="board"></div>
 
-        // Add color to hex tiles on click
-        $('#board').on('click', '.hex', function() {
-            if (!$(this).data("clicked")) {  // Only allow one click per tile
-                $.getJSON('/add_tile', function(data) {
-                    $(this).css('background-color', data.color);
-                    $(this).data("clicked", true);  // Mark as clicked
-                }.bind(this));
-            }
-        });
-    });
-</script>
+    <div id="player-wins">
+        <span>Player 1: 0 Wins</span>
+        <span>Player 2: 0 Wins</span>
+        <span>Player 3: 0 Wins</span>
+        <span>Player 4: 0 Wins</span>
+    </div>
 
+    <!-- Control Buttons -->
+    <div id="control-panel">
+        <h3>Number of Players:</h3>
+        <button onclick="selectPlayers(1)">1</button>
+        <button onclick="selectPlayers(2)">2</button>
+        <button onclick="selectPlayers(3)">3</button>
+        <button onclick="selectPlayers(4)">4</button>
+
+        <h3>Choose Difficulty Level:</h3>
+        <button onclick="selectLevel('Easy')">Easy</button>
+        <button onclick="selectLevel('Medium')">Medium</button>
+        <button onclick="selectLevel('Hard')">Hard</button>
+        <button onclick="selectLevel('Expert')">Expert</button>
+    </div>
+
+    <button onclick="restartGame()">Restart Game</button>
+
+    <script src="/static/app.js"></script>
 </body>
 </html>

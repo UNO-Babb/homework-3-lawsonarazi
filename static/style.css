@@ -1,0 +1,63 @@
+body {
+    font-family: Arial, sans-serif;
+    text-align: center;
+    margin: 0;
+    padding: 0;
+    background-color: #f0f0f0;
+}
+
+h1 {
+    margin-top: 20px;
+}
+
+#level-info {
+    margin: 20px 0;
+    font-size: 18px;
+}
+
+#board {
+    display: grid;
+    grid-template-columns: repeat(10, 40px); /* 10 columns, each 40px */
+    grid-template-rows: repeat(10, 40px); /* 10 rows, each 40px */
+    gap: 5px; /* Space between squares */
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.square {
+    width: 40px;
+    height: 40px;
+    background-color: gray; /* Default color for squares */
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+/* Color styles for different square types */
+.square.passable {
+    background-color: gray; /* Passable square */
+}
+
+.square.impassable {
+    background-color: gray; /* Impassable square */
+}
+
+.square.green {
+    background-color: green; /* Current player's position */
+}
+
+.square.red {
+    background-color: red; /* Flashing when stepping on impassable squares */
+}
+
+.square.blue {
+    background-color: lightblue; /* Adjacent squares */
+}
+
+/* Additional styling for highlighting active player or winning square */
+.square.active {
+    border: 2px solid yellow; /* Border for active player's square */
+}
+
+.square.winning {
+    background-color: gold; /* Winning square color */
+}
